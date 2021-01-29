@@ -6,9 +6,10 @@ header {
   }
 
 body {
+	margin: 0;
+	padding: 0;
     overflow: scroll;
 }
-
 
 .wrapper {
     display: grid;
@@ -17,6 +18,7 @@ body {
     width: 100vw;
     height: 100vh;
 }
+
 .button {
   border: none;
   color: white;
@@ -43,13 +45,15 @@ body {
     background-color: green;
     grid-row: 3;
 }
-
 .buttonStart{
     background-color: red;
-    grid-row: 4;
-    width: 50%;
-    font-size: 12px;
-
+	grid-column: 1;
+    height: 25%;
+}
+.buttonPi{
+	background-color: black;
+	grid-column: 2;
+	height: 25%;
 }
 
 .button_container {
@@ -64,7 +68,20 @@ body {
     position: absolute;
     top: 20%;
     height: 80%;
-    width: 80%;
+    width: 100%;
+	display: grid;
+	grid-template-rows: 1.5fr 1fr; 
+}
+.video_output {
+	grid-row: 1;
+}
+.horizontal_button_container {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	grid-row: 2;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
 }
 .joy_container {
     height: 100%;
@@ -83,7 +100,6 @@ body {
     grid-column: 2;
     height: 100%;
 }
-
 .right {
     position: relative;
     background: rgba(63, 58, 55, 0.1);

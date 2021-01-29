@@ -3,6 +3,7 @@ import rospy
 import time
 import math
 import enum
+from subprocess import call
 from locomotion_modes import LocomotionMode
 import numpy as np
 
@@ -29,6 +30,14 @@ class Rover():
             self.wheel_y) / math.tan(max_steering_angle * math.pi / 180.0) + self.wheel_x
 
         self.ackermann_r_max = 250
+
+    def raspberryStop(self, raspberry_stop_command):
+        '''
+        Stop the Raspberry Pi
+        '''
+        if raspberry_stop_command is True:
+            rospy.loginfo('Raspberry Pi shutdown')
+            call("sudo poweroff", shell=True)
 
     def setLocomotionMode(self, locomotion_mode_command):
         '''

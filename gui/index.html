@@ -3,10 +3,11 @@
 
 <head>
   <meta charset="utf-8" />
-
-  <script type="text/javascript" src="http://static.robotwebtools.org/roslibjs/current/roslib.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="./robotwebtools/roslib.min.js"></script>
   <script src="./node_modules/nipplejs/dist/nipplejs.js"></script>
-  <script type="text/javascript" type="text/javascript">
+  <script type="text/javascript">
     var publishImmidiately = true;
     var host_url = window.location.hostname;
     console.log(host_url);
@@ -114,6 +115,12 @@
       buttons[button_index] = 0;
     }
 
+    function button_stop() {
+      if(confirm("Stop Raspberry Pi?")) {
+        window.location.href="http://" + host_url + ":5000/stop";
+      }
+    }
+
   </script>
   <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -128,7 +135,14 @@
 
       <div class="middle" id="middle">
         <div class="image_container">
-          <img id="video_output" style="object-fit:cover; width:100%;"></img>
+          <img class="video_output" id="video_output" style="object-fit:cover; width:100%;"></img>
+          <div class="horizontal_button_container">
+            <button class="button buttonStart" onclick="button_clicked(9)">MOTORS</button>
+            <button class="button buttonPi" onclick="button_clicked(8)">RASPBERRY</button>
+<!--
+            <button class="button buttonPi" onclick="button_stop()">RASPBERRY</button>
+-->
+          </div>
         </div>
       </div>
       <div class="right" id="right">
@@ -136,11 +150,10 @@
           <button class="button buttonY" onclick="button_clicked(3)">CRABBING</button>
           <button class="button buttonX" onclick="button_clicked(0)">SPOT TURN</button>
           <button class="button buttonA" onclick="button_clicked(1)">ACKERMANN</button>
-          <button class="button buttonStart" onclick="button_clicked(9)">MOTORS</button>
         </div>
       </div>
     </div>
   </main>
-
+</body>
 
 </html>

@@ -8,16 +8,18 @@ import math
 # Define locomotion modes
 global locomotion_mode
 global motors_enabled
+global raspi_enabled
 
 locomotion_mode = LocomotionMode.ACKERMANN.value
 motors_enabled = True
-
+raspi_enabled = True
 
 def callback(data):
 
     global locomotion_mode
     global motors_enabled
-
+    global raspi_enabled
+    
     rover_cmd = RoverCommand()
 
     # Function map for the Logitech F710 joystick
@@ -28,6 +30,7 @@ def callback(data):
     # Y             | Crabbing mode
     # Left Stick    | Control speed and direction
     # START Button  | Enable and disable motors
+    # BACK Button   | Shutdown Raspberry Pi
 
     # Reading out joystick data
     y = data.axes[1]
@@ -64,6 +67,19 @@ def callback(data):
             motors_enabled = False
 
     rover_cmd.motors_enabled = motors_enabled
+
+    # Shutdown Raspberry Pi
+    # Also disable motors
+    # BACK Button 
+    if (data.buttons[8] == 1):
+        if motors_enabled is True:
+            motors_enabled = False
+            rospy.loginfo("Motors disabled!")
+            rover_cmd.motors_enabled = motors_enabled
+        raspi_enabled = False
+        rospy.loginfo("Raspberry Pi disabled!")
+
+    rover_cmd.raspi_enabled = raspi_enabled
 
     # The velocity is decoded as value between 0...100
     rover_cmd.vel = 100 * min(math.sqrt(x*x + y*y), 1.0)

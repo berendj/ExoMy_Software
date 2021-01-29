@@ -23,6 +23,8 @@ def joy_callback(message):
     else:
         cmds.motor_angles = exomy.joystickToSteeringAngle(0, 0)
         cmds.motor_speeds = exomy.joystickToVelocity(0, 0)
+        if message.raspi_enabled is False:
+            exomy.raspberryStop(True)
 
     robot_pub.publish(cmds)
 
