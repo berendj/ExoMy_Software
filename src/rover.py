@@ -3,10 +3,12 @@ import rospy
 import time
 import math
 import enum
-from subprocess import call
+from raspberry import Raspberry
 from locomotion_modes import LocomotionMode
 import numpy as np
 
+
+raspi = Raspberry()
 
 class Rover():
     '''
@@ -36,8 +38,9 @@ class Rover():
         Stop the Raspberry Pi
         '''
         if raspberry_stop_command is True:
-            rospy.loginfo('Raspberry Pi shutdown')
-            call("sudo poweroff", shell=True)
+            rospy.loginfo('Tell Raspberry Pi to shutdown')
+            raspi = Raspberry()
+            raspi.shutdown()
 
     def setLocomotionMode(self, locomotion_mode_command):
         '''

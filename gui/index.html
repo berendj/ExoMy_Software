@@ -115,12 +115,6 @@
       buttons[button_index] = 0;
     }
 
-    function button_stop() {
-      if(confirm("Stop Raspberry Pi?")) {
-        window.location.href="http://" + host_url + ":5000/stop";
-      }
-    }
-
   </script>
   <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -138,10 +132,7 @@
           <img class="video_output" id="video_output" style="object-fit:cover; width:100%;"></img>
           <div class="horizontal_button_container">
             <button class="button buttonStart" onclick="button_clicked(9)">MOTORS</button>
-            <button class="button buttonPi" onclick="button_clicked(8)">RASPBERRY</button>
-<!--
-            <button class="button buttonPi" onclick="button_stop()">RASPBERRY</button>
--->
+            <button class="button buttonBack" onclick="button_clicked(8)">RASPBERRY</button>
           </div>
         </div>
       </div>
